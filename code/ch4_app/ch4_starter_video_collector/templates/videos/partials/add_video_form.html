@@ -1,0 +1,9 @@
+<form class="video-form fade-me-in fade-me-out" action="/videos/add/{{ cat_name }}" method="POST">
+    <input type="text" class="form-control" name="id" placeholder="YouTube ID" required>
+    <input type="text" class="form-control" name="title" placeholder="Video title" required>
+    <input type="text" name="author" class="form-control" placeholder="Video author" required>
+    <input type="number" name="view_count" class="form-control" placeholder="View count" required>
+
+    <button class="btn btn-danger" type="submit">Create</button>
+
+</form>
