@@ -4,6 +4,8 @@
     <input type="text" name="author" class="form-control" placeholder="Video author" required>
     <input type="number" name="view_count" class="form-control" placeholder="View count" required>
 
-    <button class="btn btn-danger" type="submit">Create</button>
+    <button class="btn btn-success" type="submit">Create</button>
+    <button class="btn btn-danger" hx-get="/videos/add_button/{{ cat_name }}" hx-swap="outerHTML"
+        hx-target="closest form">Cancel</button>
 
 </form>

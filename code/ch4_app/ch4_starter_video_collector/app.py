@@ -1,6 +1,7 @@
 import sys
 
 import flask
+import jinja_partials
 
 from services import video_service
 
@@ -22,12 +23,8 @@ def configure():
 
 
 def register_template_ops():
-    helpers = {
-        'len': len,
-        'isinstance': isinstance,
-        'str': str,
-        'type': type
-    }
+    jinja_partials.register_extensions(app)
+    helpers = {"len": len, "isinstance": isinstance, "str": str, "type": type}
     app.jinja_env.globals.update(**helpers)
 
 
@@ -45,7 +42,7 @@ def setup_db():
     video_service.load_data()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     configure()
     being_debugged = sys.gettrace() is not None
     app.run(debug=being_debugged)

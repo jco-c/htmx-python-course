@@ -4,6 +4,7 @@ from infrastructure.view_modifiers import response
 from viewmodels.videos.category_viewmodel import CategoryViewModel
 from viewmodels.videos.play_viewmodel import PlayViewModel
 from viewmodels.videos.add_video_viemodel import AddVideoViewModel
+from viewmodels.videos.search_viemodel import SearchViewModel
 from services.video_service import add_video
 
 blueprint = flask.Blueprint("videos", __name__, template_folder="templates")
@@ -30,6 +31,13 @@ def add_get(cat_name: str):
     return vm.to_dict()
 
 
+@blueprint.get("/videos/add_button/<cat_name>")
+@response(template_file="/videos/partials/add_video_button.html")
+def add_button_get(cat_name: str):
+    vm = CategoryViewModel(cat_name)
+    return vm.to_dict()
+
+
 @blueprint.post("/videos/add/<cat_name>")
 def add_post(cat_name: str):
     vm = AddVideoViewModel(cat_name)
@@ -44,3 +52,12 @@ def add_post(cat_name: str):
     )
 
     return flask.redirect(f"/videos/category/{cat_name}")
+
+
+@blueprint.get("/videos/search/")
+@response(template_file="/videos/search.html")
+def search():
+    vm = SearchViewModel()
+    if vm.is_htmx_request:
+        return flask.make_response(f"There are {len(vm.videos)} videos.")
+    return vm.to_dict()

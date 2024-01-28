@@ -1,0 +1,21 @@
+{% extends "shared/_layout.html" %}
+{% block main_content %}
+
+<div class="search-inputs">
+    <h1>Search video collector</h1>
+    <input  
+           name="search_text" 
+           placeholder="Search for a video..." 
+           class="form-control"
+           type="search" 
+           hx-get="/videos/search" 
+           hx-trigger="keyup changed delay:250ms, search" 
+           hx-target="#search-results">
+</div>
+
+<div class="videos search-results" id="search-results">results</div>
+
+
+{% endblock %}
+
+{% block title %}Search @ Video Collector{% endblock %}
